@@ -4,7 +4,16 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: #e0e8ee;
+  --secondary-color: #ecf0f3;
+  --black-color: #142954;
+  --gray-color: #9da9bb;
+  --violet-color: #7966e4;
+}
+
 body {
   max-width: 1280px;
   margin: 0 auto;
+  background-color: var(--secondary-color);
 }
