@@ -164,6 +164,156 @@ aside div span {
   transform: translate(0, -50%);
 }
 
+.tasks-section {
+  width: 100%;
+  max-height: 80vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  border-radius: 5px;
+  background: #ecf0f3;
+  padding: 15px 5px;
+  box-shadow: 20px 20px 20px #bebebe, -5px -5px 5px #ffffff;
+  overflow-y: auto;
+}
+
+.task-card {
+  flex: 1 0 430px;
+  max-width: 430px;
+  height: 200px;
+  display: flex;
+  border-radius: 5px;
+  padding: 10px;
+  background: #ecf0f3;
+  box-shadow: 20px 20px 20px #bebebe, -5px -5px 5px #ffffff;
+  cursor: pointer;
+}
+
+.task-card div:first-of-type {
+  width: 75%;
+}
+.task-card div:last-of-type {
+  width: 25%;
+}
+
+.task-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.task-type {
+  color: var(--gray-color);
+  margin-bottom: 8px;
+}
+
+.team {
+  width: 100%;
+}
+
+.team-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.team-img {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.team-img {
+  width: 100%;
+}
+
+.team-img img {
+  min-width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 5px 5px 5px #bebebe, -5px -5px 2px #fffdfd;
+}
+
+.team-img img:not(:first-of-type) {
+  margin-left: -10px;
+}
+
+.more-teammate {
+  min-width: 35px;
+  height: 35px;
+  background-color: var(--violet-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-left: -10px;
+  color: #fff;
+  box-shadow: 5px 5px 5px #bebebe, -5px -5px 5px #ffffff;
+}
+
+.deadline {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-color);
+}
+
+.task-card-right-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-percentage {
+  min-width: 80px;
+  height: 80px;
+  background: conic-gradient(var(--violet-color) 35deg, #d2cdcd 0deg);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-percentage::after {
+  position: absolute;
+  content: "";
+  width: 65px;
+  height: 65px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.percentage-value {
+  font-weight: 800;
+  z-index: 8;
+}
+
+.add-new-task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.add-new-task p {
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.add-icon {
+  max-width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background-color: var(--violet-color);
+  box-shadow: 4px 4px 5px #aaa9a9, -40px -40px 60px #ffffff;
+}
+
 @media (min-width: 480px) {
   .right-side {
     gap: 15px;
@@ -199,7 +349,11 @@ aside div span {
     box-shadow: 20px 20px 60px #4f4f4f, -40px -40px 60px #ffffff;
   }
 }
+
 @media (min-width: 768px) {
+  main {
+    justify-content: space-evenly;
+  }
   aside {
     width: 25%;
     height: 80vh;
@@ -210,6 +364,10 @@ aside div span {
   aside div {
     flex: 1 0 100%;
     height: 50px;
+  }
+
+  .tasks-section {
+    width: 72%;
   }
 }
 @media (min-width: 992px) {
