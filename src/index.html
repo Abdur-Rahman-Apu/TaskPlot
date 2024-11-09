@@ -196,6 +196,47 @@
     </main>
     <!-- main part end  -->
 
+
+    <!-- task add/delete modal  -->
+    <div class="task-modal-section">
+        <div class="task-modal">
+            <div class="close-icon">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+
+            <div class="task-modal-body">
+                <div class="task-action-name">Create a New Task</div>
+                <div class="task-title">
+                    <p class="task-title-name">Task Title</p>
+                    <input type="text" name="task-title" id="task-title">
+                </div>
+                <div class="task-description">
+                    <div class="task-description-title">Task Description</div>
+                    <textarea name="task-description" id="task-description" placeholder="Task description"></textarea>
+                </div>
+                <div class="team-name">
+                    <p class="team-name-title">Team Name</p>
+                    <input type="text" name="team-name" id="team-name">
+                </div>
+                <div class="deadline">
+                    <p class="deadline-title">Deadline</p>
+                    <input type="date" name="deadline" id="deadline">
+                </div>
+
+                <div class="progress">
+                    <p class="progress-title">Progress(%)</p>
+                    <input type="number" min="0" max="100" name="progress" id="progress" default-value="0">
+                </div>
+
+                <div class="modal-actions">
+                    <button class="cancel-modal">Cancel</button>
+                    <button class="delete-task">Delete Task</button>
+                    <button class="create-task">Create Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

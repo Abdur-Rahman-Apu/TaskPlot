@@ -14,6 +14,7 @@
 }
 
 body {
+  position: relative;
   max-width: 1280px;
   margin: 0 auto;
   background-color: var(--secondary-color);
@@ -63,6 +64,7 @@ nav {
 
 .user-avatar {
   position: relative;
+  cursor: pointer;
 }
 
 .user-avatar,
@@ -78,7 +80,7 @@ nav {
   padding: 8px 12px;
   border-radius: 10px;
   background: #dfdede;
-  box-shadow: 20px 20px 50px #bebebe, -20px -20px 50px #ffffff;
+  box-shadow: 20px 20px 50px #bebebe, -5px -5px 5px #ffffff;
   display: none;
 }
 
@@ -91,6 +93,20 @@ nav {
   font-size: 0.9rem;
   margin-top: 2px;
   color: var(--gray-color);
+}
+
+.user-avatar:hover .greetings {
+  display: block;
+}
+
+@keyframes showAnim {
+  0% {
+    display: none;
+  }
+
+  100% {
+    display: block;
+  }
 }
 
 .search-task {
@@ -344,6 +360,157 @@ aside div span {
   box-shadow: 4px 4px 5px #aaa9a9, -40px -40px 60px #ffffff;
 }
 
+/* task modal design start  */
+
+.task-modal-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #26252522;
+  z-index: 100;
+}
+
+.task-modal {
+  /* width: 40%; */
+  width: 90%;
+  height: 740px;
+  background-color: var(--secondary-color);
+  box-shadow: 20px 20px 60px #4f4f4f;
+  border-radius: 8px;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.task-modal::-webkit-scrollbar {
+  width: 2px;
+}
+
+.task-modal::-webkit-scrollbar-thumb {
+  background-color: var(--black-color);
+}
+
+.close-icon {
+  width: fit-content;
+  padding: 12px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 5px #aaa9a9, -4px -4px 4px #d6d4d4;
+  cursor: pointer;
+}
+
+.close-icon:hover {
+  box-shadow: inset 4px 4px 5px #aaa9a9, inset -4px -4px 4px #d6d4d4;
+}
+
+.task-modal-body {
+  margin-top: 15px;
+}
+
+.task-action-name {
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--violet-color);
+  margin: 15px 0;
+  text-align: center;
+}
+
+.task-title-name,
+.task-description-title,
+.team-name-title,
+.deadline-title,
+.progress-title {
+  color: var(--black-color);
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+input,
+textarea {
+  height: 35px;
+  width: 100%;
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #cdd3d8;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+textarea {
+  height: 120px;
+  resize: none;
+}
+
+textarea::-webkit-scrollbar {
+  width: 2px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: var(--black-color);
+}
+
+input[type="number"] {
+  font-size: 0.875rem;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.modal-actions button {
+  flex: 1 0 120px;
+  padding: 12px;
+
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 4px 4px 5px #ddd8d8, -4px -4px 4px #eae6e6;
+  transition: all 1s;
+}
+
+.modal-actions button:hover {
+  scale: 0.9;
+}
+
+.cancel-modal {
+  background-color: var(--black-color);
+}
+
+.delete-task {
+  background-color: #f53b57;
+}
+
+.create-task {
+  background-color: var(--violet-color);
+}
+
 @media (min-width: 480px) {
   .right-side {
     gap: 15px;
@@ -356,11 +523,16 @@ aside div span {
   #search {
     height: 35px;
     padding: 15px;
+    padding-right: 20px;
     border: none;
     outline: none;
     border-radius: 25px;
     background-color: #e0e0e0;
     box-shadow: inset 4px 4px 10px #cdc6c6, inset -4px -4px 10px #e7e4e4;
+  }
+
+  #search::placeholder {
+    color: var(--black-color);
   }
 
   .search-btn {
@@ -389,6 +561,7 @@ aside div span {
     flex-direction: row;
     justify-content: space-evenly;
   }
+
   aside {
     width: 25%;
     height: 80vh;
@@ -396,6 +569,7 @@ aside div span {
     align-content: start;
     gap: 20px;
   }
+
   aside div {
     flex: 1 0 100%;
     height: 50px;
@@ -403,6 +577,11 @@ aside div span {
 
   .tasks-section {
     width: 72%;
+  }
+
+  .task-modal {
+    width: 40%;
+    height: 90%;
   }
 }
 @media (min-width: 992px) {
