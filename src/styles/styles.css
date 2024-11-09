@@ -113,6 +113,7 @@ nav {
 /* main part design start  */
 main {
   display: flex;
+  flex-direction: column;
 }
 
 aside {
@@ -197,6 +198,8 @@ aside div span {
 }
 
 .tasks {
+  margin-top: 25px;
+  padding: 10px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -205,7 +208,8 @@ aside div span {
 }
 
 .task-card {
-  flex: 1 0 430px;
+  /* flex: 1 0 430px; */
+  flex-grow: 1;
   max-width: 430px;
   height: 200px;
   display: flex;
@@ -306,7 +310,7 @@ aside div span {
   content: "";
   width: 65px;
   height: 65px;
-  background-color: #fff;
+  background-color: #f9f5f5;
   border-radius: 50%;
 }
 
@@ -374,10 +378,15 @@ aside div span {
     align-items: center;
     box-shadow: 20px 20px 60px #4f4f4f, -40px -40px 60px #ffffff;
   }
+
+  .task-card {
+    flex: 1 0 430px;
+  }
 }
 
 @media (min-width: 768px) {
   main {
+    flex-direction: row;
     justify-content: space-evenly;
   }
   aside {
