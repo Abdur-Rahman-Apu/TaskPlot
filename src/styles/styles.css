@@ -432,8 +432,8 @@ aside div span {
   margin-bottom: 10px;
 }
 
-input,
-textarea {
+.task-modal-body input,
+.task-modal-body textarea {
   height: 35px;
   width: 100%;
   margin-bottom: 25px;
@@ -446,32 +446,32 @@ textarea {
   font-weight: 900;
 }
 
-textarea {
+.task-modal-body textarea {
   height: 120px;
   resize: none;
 }
 
-textarea::-webkit-scrollbar {
+.task-modal-body textarea::-webkit-scrollbar {
   width: 2px;
 }
 
-textarea::-webkit-scrollbar-thumb {
+.task-modal-body textarea::-webkit-scrollbar-thumb {
   background-color: var(--black-color);
 }
 
-input[type="number"] {
+.task-modal-body input[type="number"] {
   font-size: 0.875rem;
 }
 
 /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.task-modal-body input::-webkit-outer-spin-button,
+.task-modal-body input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Firefox */
-input[type="number"] {
+.task-modal-body input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -585,4 +585,11 @@ input[type="number"] {
   }
 }
 @media (min-width: 992px) {
+}
+
+@media (min-height: 900px) {
+  .task-modal {
+    width: 90%;
+    height: 740px;
+  }
 }
