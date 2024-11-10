@@ -208,29 +208,34 @@
                 <div class="task-action-name">Create a New Task</div>
                 <div class="task-title">
                     <p class="task-title-name">Task Title</p>
-                    <input type="text" name="task-title" id="task-title">
+                    <input type="text" name="task-title" id="task-title" placeholder="Write your task title...">
+                    <p class="err-msg">Title is required</p>
                 </div>
                 <div class="task-description">
                     <div class="task-description-title">Task Description</div>
-                    <textarea name="task-description" id="task-description" placeholder="Task description"></textarea>
+                    <textarea name="task-description" id="task-description"
+                        placeholder="Write your task description..."></textarea>
+                    <p class="err-msg">Task description is required</p>
                 </div>
                 <div class="team-name">
                     <p class="team-name-title">Team Name</p>
-                    <input type="text" name="team-name" id="team-name">
+                    <input type="text" name="team-name" id="team-name" placeholder="Write team name...">
+                    <p class="err-msg">Team name is required</p>
                 </div>
                 <div class="deadline">
                     <p class="deadline-title">Deadline</p>
                     <input type="date" name="deadline" id="deadline">
+                    <p class="err-msg">Deadline is required</p>
                 </div>
 
                 <div class="progress">
                     <p class="progress-title">Progress(%)</p>
-                    <input type="number" min="0" max="100" name="progress" id="progress" default-value="0">
+                    <input type="number" name="progress" id="progress" placeholder="Write task progress number...">
                 </div>
 
                 <div class="modal-actions">
-                    <button class="cancel-modal">Cancel</button>
-                    <button class="delete-task">Delete Task</button>
+                    <button class="cancel-modal hidden">Cancel</button>
+                    <button class="delete-task hidden">Delete Task</button>
                     <button class="create-task">Create Task</button>
                 </div>
             </div>
