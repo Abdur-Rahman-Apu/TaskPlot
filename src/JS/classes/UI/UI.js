@@ -325,6 +325,9 @@ class UI {
       case "create":
         this.#handleAddNewTask();
         break;
+      case "cancel":
+        this.#handleCloseModal();
+        break;
 
       default:
         break;
@@ -341,6 +344,8 @@ class UI {
     const { taskModalContainer } = this.#loadSelector();
 
     addStyle(taskModalContainer, { display: "none" });
+
+    this.#emptyModalInputs();
   }
 
   #handleDisplayInitialTasks() {
