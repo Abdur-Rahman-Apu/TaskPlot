@@ -1,4 +1,6 @@
 import { addStyle, listenEvent, selectElm } from "../../utils/utils";
+import data from "../Data/Data";
+import storage from "../Storage/Storage";
 
 class UI {
   #loadSelector() {
@@ -14,6 +16,8 @@ class UI {
     const progressInput = selectElm("#progress");
     // const createTaskBtn = selectElm(".create-task");
     const modalActionsContainer = selectElm(".modal-actions");
+    const toastContainer = selectElm(".toast-section");
+    const toastMsg = selectElm(".toast-message");
 
     return {
       addTaskBtn,
@@ -26,7 +30,27 @@ class UI {
       progressInput,
       modalActionsContainer,
       taskModalBody,
+      toastContainer,
+      toastMsg,
     };
+  }
+
+  #showToast(msg) {
+    const { toastContainer, toastMsg } = this.#loadSelector();
+
+    addStyle(toastContainer, { display: "flex" });
+  }
+  #hideToast() {
+    const { toastContainer } = this.#loadSelector();
+
+    setTimeout(() => {
+      addStyle(toastContainer, { display: "none" });
+    }, 2000);
+  }
+
+  #displayToastMsg() {
+    this.#showToast();
+    this.#hideToast();
   }
 
   #handleHideDeadlineErrMsg(e) {
@@ -64,13 +88,28 @@ class UI {
     return Number(input.value) === 0 ? true : false;
   }
 
-  #inputValidation() {
+  #emptyModalInputs() {
     const {
       taskTitleInput,
       taskDescriptionInput,
       teamNameInput,
       deadLineInput,
       progressInput,
+    } = this.#loadSelector();
+
+    taskTitleInput.value = "";
+    taskDescriptionInput.value = "";
+    teamNameInput.value = "";
+    deadLineInput.value = "";
+    progressInput.value = 0;
+  }
+
+  #inputValidation() {
+    const {
+      taskTitleInput,
+      taskDescriptionInput,
+      teamNameInput,
+      deadLineInput,
     } = this.#loadSelector();
 
     const isTitleEmpty = this.#isInputFieldEmpty(taskTitleInput);
@@ -111,6 +150,35 @@ class UI {
     }
   }
 
+  #getId() {
+    const allTasks = data.allTasks;
+
+    if (allTasks?.length) {
+      const id = Number(allTasks[allTasks.length - 1]?.id);
+      return id + 1;
+    } else {
+      return 1;
+    }
+  }
+
+  #getDesiredDeadLineFormat(value) {
+    const dateArr = value.split("-");
+
+    return dateArr.reverse().join("-");
+  }
+
+  #getRandomTeamPic() {
+    const teamPicArr = [];
+    for (let i = 0; i < 3; i++) {
+      const start = i * 4;
+      const end = i * 3 + 3 + i > 10 ? 10 : i * 3 + 3 + i;
+      const picNumb = Math.ceil(Math.random() * (end - start) + start);
+
+      teamPicArr.push(picNumb);
+    }
+    return teamPicArr;
+  }
+
   #handleAddNewTask() {
     console.log("add new task");
     const {
@@ -124,6 +192,23 @@ class UI {
     const isSuccessValidation = this.#inputValidation();
 
     if (!isSuccessValidation) return;
+
+    const taskData = {
+      id: this.#getId(),
+      title: taskTitleInput?.value,
+      description: taskDescriptionInput?.value,
+      teamName: teamNameInput?.value,
+      deadline: this.#getDesiredDeadLineFormat(deadLineInput?.value),
+      progress: progressInput?.value,
+      teamPic: this.#getRandomTeamPic(),
+    };
+
+    data.allTasks = taskData;
+    storage.setIntoStorage(data.allTasks);
+
+    this.#displayToastMsg("Added a new task");
+    this.#handleCloseModal();
+    this.#emptyModalInputs();
   }
   #handleEditTask() {}
   #handleDeleteTask() {}

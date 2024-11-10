@@ -1,9 +1,9 @@
 class Data {
-  #allTasks;
+  #allTasks = [];
   #displayTasks;
 
   set allTasks(data) {
-    this.#allTasks = data;
+    this.#allTasks = [...this.#allTasks, data];
   }
   get allTasks() {
     return this.#allTasks;
