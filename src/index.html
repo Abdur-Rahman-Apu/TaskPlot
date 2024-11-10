@@ -230,13 +230,14 @@
 
                 <div class="progress">
                     <p class="progress-title">Progress(%)</p>
-                    <input type="number" name="progress" id="progress" placeholder="Write task progress number...">
+                    <input type="number" name="progress" id="progress" placeholder="Write task progress number..."
+                        value="0">
                 </div>
 
                 <div class="modal-actions">
-                    <button class="cancel-modal hidden">Cancel</button>
-                    <button class="delete-task hidden">Delete Task</button>
-                    <button class="create-task">Create Task</button>
+                    <button class="cancel-modal hidden" data-action="delete">Cancel</button>
+                    <button class="delete-task hidden" data-action="delete">Delete Task</button>
+                    <button class="task-action" data-action="create">Create Task</button>
                 </div>
             </div>
         </div>

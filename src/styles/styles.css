@@ -486,6 +486,7 @@ aside div span {
   color: red;
   font-size: 0.8rem;
   font-weight: 700;
+  display: none;
 }
 
 .modal-actions {
@@ -520,7 +521,7 @@ aside div span {
   background-color: #f53b57;
 }
 
-.create-task {
+.task-action {
   background-color: var(--violet-color);
 }
 
