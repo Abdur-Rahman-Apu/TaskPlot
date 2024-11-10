@@ -159,12 +159,12 @@ aside div {
   cursor: pointer;
 }
 
-aside div:hover {
+aside div:hover:not(.active) {
   box-shadow: inset 2px 2px 5px #bcbcbc, inset -2px -2px 5px #ffffff,
     2px 2px 5px #bcbcbc, -2px -2px 5px #ffffff;
 }
 
-aside div:first-of-type {
+aside div.active {
   background-color: var(--violet-color);
   font-weight: 900;
   color: #fff;
@@ -531,7 +531,7 @@ aside div span {
   padding: 15px;
   border-radius: 5px;
   box-shadow: 5px 5px 5px #bebebe, -5px -5px 5px #ffffff;
-  /* display: none; */
+  display: none;
 }
 
 @media (min-width: 480px) {
