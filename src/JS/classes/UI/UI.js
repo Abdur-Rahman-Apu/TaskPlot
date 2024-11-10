@@ -8,12 +8,7 @@ import sixthTeamImg from "../../../assets/avatars/6.png";
 import seventhTeamImg from "../../../assets/avatars/7.png";
 import eightTeamImg from "../../../assets/avatars/8.png";
 import nineTeamImg from "../../../assets/avatars/9.png";
-import {
-  addStyle,
-  insertAdjHTML,
-  listenEvent,
-  selectElm,
-} from "../../utils/utils";
+import { addStyle, listenEvent, selectElm } from "../../utils/utils";
 import data from "../Data/Data";
 import storage from "../Storage/Storage";
 
@@ -100,10 +95,11 @@ class UI {
 
     // console.log(foo);
     // console.log(teamImages);
-    const cards = tasks.map((task) => {
-      console.log(task);
-      console.log(task, "team pic");
-      return `<div class="task-card" data-id="${task?.id}">
+    const cards = tasks?.length
+      ? tasks.map((task) => {
+          console.log(task);
+          console.log(task, "team pic");
+          return `<div class="task-card" data-id="${task?.id}">
           <div class="task-card-left-side">
             <p class="task-title">${task?.title}</p>
             <p class="task-type">${task?.teamName}</p>
@@ -139,7 +135,8 @@ class UI {
             </div>
           </div>
         </div>`;
-    });
+        })
+      : [];
 
     cards.push(`<div class="task-card add-new-task">
                     <div class="add-icon">
@@ -154,7 +151,7 @@ class UI {
   #displayTasks() {
     const { tasksCardContainer } = this.#loadSelector();
     const taskCardsHTML = this.#getTaskCardsHTML();
-    insertAdjHTML(tasksCardContainer, taskCardsHTML);
+    tasksCardContainer.innerHTML = taskCardsHTML;
   }
 
   #handleHideDeadlineErrMsg(e) {
@@ -308,6 +305,7 @@ class UI {
     };
 
     data.allTasks = taskData;
+    data.displayTasks = data.allTasks;
     storage.setIntoStorage(data.allTasks);
 
     this.#displayTasks();
@@ -346,12 +344,13 @@ class UI {
   }
 
   #handleDisplayInitialTasks() {
+    window.history.replaceState({}, document.title, "tasks?categories=all");
     const tasks = storage.getFromStorage();
     if (tasks && tasks?.length) {
       data.allTasks = tasks;
       data.displayTasks = data.allTasks;
-      this.#displayTasks();
     }
+    this.#displayTasks();
   }
 
   init() {
