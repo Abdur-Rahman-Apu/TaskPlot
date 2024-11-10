@@ -1,4 +1,19 @@
-import { addStyle, listenEvent, selectElm } from "../../utils/utils";
+import firstTeamImg from "../../../assets/avatars/1.png";
+import tenTeamImg from "../../../assets/avatars/10.png";
+import secondTeamImg from "../../../assets/avatars/2.png";
+import thirdTeamImg from "../../../assets/avatars/3.png";
+import fourthTeamImg from "../../../assets/avatars/4.png";
+import fifthTeamImg from "../../../assets/avatars/5.png";
+import sixthTeamImg from "../../../assets/avatars/6.png";
+import seventhTeamImg from "../../../assets/avatars/7.png";
+import eightTeamImg from "../../../assets/avatars/8.png";
+import nineTeamImg from "../../../assets/avatars/9.png";
+import {
+  addStyle,
+  insertAdjHTML,
+  listenEvent,
+  selectElm,
+} from "../../utils/utils";
 import data from "../Data/Data";
 import storage from "../Storage/Storage";
 
@@ -18,6 +33,7 @@ class UI {
     const modalActionsContainer = selectElm(".modal-actions");
     const toastContainer = selectElm(".toast-section");
     const toastMsg = selectElm(".toast-message");
+    const tasksCardContainer = selectElm(".tasks");
 
     return {
       addTaskBtn,
@@ -32,6 +48,7 @@ class UI {
       taskModalBody,
       toastContainer,
       toastMsg,
+      tasksCardContainer,
     };
   }
 
@@ -51,6 +68,93 @@ class UI {
   #displayToastMsg() {
     this.#showToast();
     this.#hideToast();
+  }
+
+  #getTeamMemImg(num) {
+    switch (num) {
+      case 1:
+        return firstTeamImg;
+      case 2:
+        return secondTeamImg;
+      case 3:
+        return thirdTeamImg;
+      case 4:
+        return fourthTeamImg;
+      case 5:
+        return fifthTeamImg;
+      case 6:
+        return sixthTeamImg;
+      case 7:
+        return seventhTeamImg;
+      case 8:
+        return eightTeamImg;
+      case 9:
+        return nineTeamImg;
+      case 10:
+        return tenTeamImg;
+    }
+  }
+
+  #getTaskCardsHTML() {
+    const tasks = data.displayTasks;
+
+    // console.log(foo);
+    // console.log(teamImages);
+    const cards = tasks.map((task) => {
+      console.log(task);
+      console.log(task, "team pic");
+      return `<div class="task-card" data-id="${task?.id}">
+          <div class="task-card-left-side">
+            <p class="task-title">${task?.title}</p>
+            <p class="task-type">${task?.teamName}</p>
+
+            <div class="team">
+              <p class="team-title">Team</p>
+              <div class="team-img">
+                <img src=${this.#getTeamMemImg(
+                  task?.teamPic[0]
+                )} alt="This image is indicating the first team member image" />
+
+                <img src=${this.#getTeamMemImg(
+                  task?.teamPic[1]
+                )} alt="This image is indicating the second team member image" />
+
+                <img src=${this.#getTeamMemImg(
+                  task?.teamPic[2]
+                )}.png" alt="This image is indicating the third team member image" />
+
+                <div class="more-teammate">
+                  <i class="fa-solid fa-plus"></i>
+                </div>
+              </div>
+            </div>
+            <p class="deadline">
+              <i class="fa-solid fa-calendar-days"></i> Deadline:
+              <span class="deadline-time">${task?.deadline}</span>
+            </p>
+          </div>
+          <div class="task-card-right-side">
+            <div class="progress-percentage">
+              <p class="percentage-value">${task?.progress}%</p>
+            </div>
+          </div>
+        </div>`;
+    });
+
+    cards.push(`<div class="task-card add-new-task">
+                    <div class="add-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>Add New Task</p>
+                </div>`);
+
+    return cards.join("");
+  }
+
+  #displayTasks() {
+    const { tasksCardContainer } = this.#loadSelector();
+    const taskCardsHTML = this.#getTaskCardsHTML();
+    insertAdjHTML(tasksCardContainer, taskCardsHTML);
   }
 
   #handleHideDeadlineErrMsg(e) {
@@ -206,10 +310,12 @@ class UI {
     data.allTasks = taskData;
     storage.setIntoStorage(data.allTasks);
 
+    this.#displayTasks();
     this.#displayToastMsg("Added a new task");
     this.#handleCloseModal();
     this.#emptyModalInputs();
   }
+
   #handleEditTask() {}
   #handleDeleteTask() {}
 
@@ -239,6 +345,15 @@ class UI {
     addStyle(taskModalContainer, { display: "none" });
   }
 
+  #handleDisplayInitialTasks() {
+    const tasks = storage.getFromStorage();
+    if (tasks && tasks?.length) {
+      data.allTasks = tasks;
+      data.displayTasks = data.allTasks;
+      this.#displayTasks();
+    }
+  }
+
   init() {
     const {
       addTaskBtn,
@@ -249,6 +364,12 @@ class UI {
       taskModalBody,
       deadLineInput,
     } = this.#loadSelector();
+
+    listenEvent(
+      document,
+      "DOMContentLoaded",
+      this.#handleDisplayInitialTasks.bind(this)
+    );
 
     listenEvent(addTaskBtn, "click", this.#handleOpenModal.bind(this));
 

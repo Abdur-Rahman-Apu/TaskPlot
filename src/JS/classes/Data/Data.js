@@ -3,7 +3,9 @@ class Data {
   #displayTasks;
 
   set allTasks(data) {
-    this.#allTasks = [...this.#allTasks, data];
+    this.#allTasks = Array.isArray(data)
+      ? [...this.#allTasks, ...data]
+      : [...this.#allTasks, data];
   }
   get allTasks() {
     return this.#allTasks;
