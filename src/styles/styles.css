@@ -515,6 +515,10 @@ aside div span {
 /* toast  */
 
 .toast-section {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   left: 50%;
   top: 5%;
@@ -522,11 +526,12 @@ aside div span {
   z-index: 100;
   background-color: var(--violet-color);
   color: #fff;
+  font-size: 1.05rem;
   font-weight: 700;
   padding: 15px;
   border-radius: 5px;
   box-shadow: 5px 5px 5px #bebebe, -5px -5px 5px #ffffff;
-  display: none;
+  /* display: none; */
 }
 
 @media (min-width: 480px) {
@@ -572,6 +577,10 @@ aside div span {
   .task-card {
     flex: 1 0 430px;
   }
+
+  .toast-section {
+    width: 60%;
+  }
 }
 
 @media (min-width: 768px) {
@@ -601,13 +610,24 @@ aside div span {
     width: 40%;
     height: 90%;
   }
+
+  .toast-section {
+    width: 40%;
+  }
 }
 @media (min-width: 992px) {
+  .toast-section {
+    width: fit-content;
+  }
 }
 
 @media (min-height: 900px) {
   .task-modal {
     width: 90%;
     height: 740px;
+  }
+
+  .toast-section {
+    font-size: 1rem;
   }
 }
