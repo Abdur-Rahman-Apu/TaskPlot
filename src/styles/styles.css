@@ -388,11 +388,7 @@ aside div span {
 }
 
 .task-modal::-webkit-scrollbar {
-  width: 2px;
-}
-
-.task-modal::-webkit-scrollbar-thumb {
-  background-color: var(--black-color);
+  display: none;
 }
 
 .close-icon {
@@ -549,6 +545,7 @@ aside div span {
     padding-right: 20px;
     border: none;
     outline: none;
+    font-weight: 600;
     border-radius: 25px;
     background-color: #e0e0e0;
     box-shadow: inset 4px 4px 10px #cdc6c6, inset -4px -4px 10px #e7e4e4;

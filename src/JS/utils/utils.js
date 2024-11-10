@@ -7,7 +7,7 @@ const insertAdjHTML = (parent, html) => {
 const addStyle = (elm, newStyle) => Object.assign(elm.style, newStyle);
 
 const listenEvent = (elm, event, handler) =>
-  document.addEventListener(elm, event, handler);
+  elm.addEventListener(event, handler);
 
 const lowerCase = (str) => str.toLowerCase();
 
