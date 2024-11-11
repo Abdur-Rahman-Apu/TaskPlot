@@ -14,6 +14,7 @@ import storage from "../Storage/Storage";
 
 class UI {
   #loadSelector() {
+    const sidebarContainer = selectElm("aside");
     const allTaskCountElm = selectElm(".all-task-count");
     const newTaskCountElm = selectElm(".new-task-count");
     const inProgressTaskCountElm = selectElm(".in-progress-task-count");
@@ -63,6 +64,7 @@ class UI {
       newTaskCountElm,
       inProgressTaskCountElm,
       completeTaskCountElm,
+      sidebarContainer,
     };
   }
 
@@ -188,14 +190,7 @@ class UI {
     tasksCardContainer.innerHTML = taskCardsHTML;
   }
 
-  #populateUIOfTaskCount() {
-    const {
-      allTaskCountElm,
-      newTaskCountElm,
-      inProgressTaskCountElm,
-      completeTaskCountElm,
-    } = this.#loadSelector();
-
+  #getTasksCategoryWise() {
     const allTasks = data.allTasks;
 
     const newTasks = allTasks?.filter((task) => task.progress == 0);
@@ -205,6 +200,20 @@ class UI {
     );
 
     const completedTasks = allTasks?.filter((task) => task.progress == 100);
+
+    return { allTasks, newTasks, inProgressTasks, completedTasks };
+  }
+
+  #populateUIOfTaskCount() {
+    const {
+      allTaskCountElm,
+      newTaskCountElm,
+      inProgressTaskCountElm,
+      completeTaskCountElm,
+    } = this.#loadSelector();
+
+    const { allTasks, newTasks, inProgressTasks, completedTasks } =
+      this.#getTasksCategoryWise();
 
     allTaskCountElm.innerText = allTasks?.length ?? 0;
     newTaskCountElm.innerText = newTasks?.length ?? 0;
@@ -562,8 +571,59 @@ class UI {
     }
   }
 
+  #removePreviousActiveCategoryClass() {
+    const { sidebarContainer } = this.#loadSelector();
+    const allChild = sidebarContainer.children;
+
+    Array.from(allChild).forEach((child) => {
+      console.log(child, "child");
+      if (child.classList.contains("active")) {
+        child.classList.remove("active");
+      }
+    });
+  }
+
+  #populateUIForChangingCategory(category) {
+    this.#removePreviousActiveCategoryClass();
+    const url = new URL(location.href);
+    url.searchParams.delete("category");
+
+    url.searchParams.set("category", category);
+
+    console.log(url);
+    history.pushState(null, "", url);
+  }
+
+  #handleChangeTaskCategory(e) {
+    console.log(e.target);
+    const categoryParentElm = e.target.closest(".category");
+    console.log(categoryParentElm);
+
+    if (categoryParentElm) {
+      const classes = categoryParentElm.classList;
+      console.log(classes);
+
+      if (classes.contains("all-tasks") && !classes.contains("active")) {
+        this.#removePreviousActiveCategoryClass();
+      }
+      if (classes.contains("new-tasks") && !classes.contains("active")) {
+        this.#populateUIForChangingCategory();
+        classes.add("active");
+      }
+      if (
+        classes.contains("in-progress-tasks") &&
+        !classes.contains("active")
+      ) {
+        this.#removePreviousActiveCategoryClass();
+      }
+      if (classes.contains("complete-tasks") && !classes.contains("active")) {
+        this.#removePreviousActiveCategoryClass();
+      }
+    }
+  }
+
   #handleDisplayInitialTasks() {
-    window.history.replaceState({}, document.title, "tasks?categories=all");
+    window.history.replaceState({}, document.title, "tasks?category=all");
     const tasks = storage.getFromStorage();
     if (tasks && tasks?.length) {
       data.allTasks = tasks;
@@ -583,6 +643,7 @@ class UI {
       taskModalBody,
       deadLineInput,
       tasksCardContainer,
+      sidebarContainer,
     } = this.#loadSelector();
 
     listenEvent(
@@ -622,6 +683,11 @@ class UI {
       tasksCardContainer,
       "click",
       this.#handleTaskCardView.bind(this)
+    );
+    listenEvent(
+      sidebarContainer,
+      "click",
+      this.#handleChangeTaskCategory.bind(this)
     );
   }
 }
