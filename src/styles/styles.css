@@ -315,7 +315,6 @@ aside div span {
   position: relative;
   min-width: 80px;
   height: 80px;
-  background: conic-gradient(var(--violet-color) 35deg, #d2cdcd 0deg);
   border-radius: 50%;
   display: flex;
   justify-content: center;

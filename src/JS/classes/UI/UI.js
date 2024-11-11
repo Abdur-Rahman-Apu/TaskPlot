@@ -171,7 +171,7 @@ class UI {
             </p>
           </div>
           <div class="task-card-right-side">
-            <div class="progress-percentage">
+            <div class="progress-percentage progress-percentage-${task.id}">
               <p class="percentage-value">${task?.progress}%</p>
             </div>
           </div>
@@ -193,6 +193,8 @@ class UI {
     const { tasksCardContainer } = this.#loadSelector();
     const taskCardsHTML = this.#getTaskCardsHTML();
     tasksCardContainer.innerHTML = taskCardsHTML;
+
+    this.#updateStyleOfTheProgress();
   }
 
   #getTasksCategoryWise() {
@@ -408,6 +410,28 @@ class UI {
     }
 
     storage.setIntoStorage(data.allTasks);
+  }
+
+  #updateStyleOfTheProgress() {
+    const tasks = data.displayTasks;
+
+    tasks.forEach((task) => {
+      console.log(task.id);
+      const elm = document.querySelector(`.progress-percentage-${task.id}`);
+
+      console.log(elm);
+      console.log(elm.nextElementSibling);
+
+      const progressValue = elm.firstElementChild.innerText.split("%").join("");
+
+      console.log(progressValue, "progress value");
+
+      const violetIndicatorDeg = (Number(progressValue) * 360) / 100;
+
+      addStyle(elm, {
+        background: `conic-gradient(var(--violet-color) ${violetIndicatorDeg}deg, #d2cdcd 0deg)`,
+      });
+    });
   }
 
   #populateTaskData({ action, taskId }) {
