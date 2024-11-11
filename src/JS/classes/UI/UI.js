@@ -60,8 +60,11 @@ class UI {
   #showToast(msg) {
     const { toastContainer, toastMsg } = this.#loadSelector();
 
+    toastMsg.innerText = msg;
+
     addStyle(toastContainer, { display: "flex" });
   }
+
   #hideToast() {
     const { toastContainer } = this.#loadSelector();
 
@@ -70,8 +73,21 @@ class UI {
     }, 2000);
   }
 
-  #displayToastMsg() {
-    this.#showToast();
+  #displayToastMsg(action) {
+    let toastMsg;
+
+    if (action === "new") {
+      toastMsg = "Added a new task";
+    }
+
+    if (action === "edit") {
+      toastMsg = "Task Edited";
+    }
+
+    if (action === "delete") {
+      toastMsg = "Task Deleted";
+    }
+    this.#showToast(toastMsg);
     this.#hideToast();
   }
 
@@ -356,7 +372,8 @@ class UI {
     this.#populateDataStorage({ taskData, action });
 
     this.#displayTasks();
-    this.#displayToastMsg("Added a new task");
+
+    this.#displayToastMsg(action);
     this.#handleCloseModal();
     this.#emptyModalInputs();
   }
