@@ -14,6 +14,7 @@ import storage from "../Storage/Storage";
 
 class UI {
   #loadSelector() {
+    const dateShowELm = selectElm(".date");
     const timeShowELm = selectElm(".timer p");
 
     const searchInput = selectElm("#search");
@@ -74,6 +75,7 @@ class UI {
       searchInput,
       searchBtn,
       timeShowELm,
+      dateShowELm,
     };
   }
 
@@ -781,6 +783,13 @@ class UI {
     this.#updateActiveCategoryInSidebar();
   }
 
+  #displayDate() {
+    const { dateShowELm } = this.#loadSelector();
+    const date = new Date();
+    const localDate = date.toUTCString().slice(0, 16);
+    dateShowELm.innerText = localDate;
+  }
+
   #displayTimer() {
     const { timeShowELm } = this.#loadSelector();
     setInterval(() => {
@@ -805,6 +814,7 @@ class UI {
       searchBtn,
     } = this.#loadSelector();
 
+    this.#displayDate();
     this.#displayTimer();
 
     listenEvent(
