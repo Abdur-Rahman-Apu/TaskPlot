@@ -14,7 +14,10 @@ import storage from "../Storage/Storage";
 
 class UI {
   #loadSelector() {
+    const timeShowELm = selectElm(".timer p");
+
     const searchInput = selectElm("#search");
+
     const searchBtn = selectElm(".search-btn");
 
     const sidebarContainer = selectElm("aside");
@@ -70,6 +73,7 @@ class UI {
       sidebarContainer,
       searchInput,
       searchBtn,
+      timeShowELm,
     };
   }
 
@@ -777,6 +781,16 @@ class UI {
     this.#updateActiveCategoryInSidebar();
   }
 
+  #displayTimer() {
+    const { timeShowELm } = this.#loadSelector();
+    setInterval(() => {
+      const date = new Date();
+      const localTime = date.toLocaleTimeString();
+      console.log(localTime, "local time");
+      timeShowELm.innerText = localTime;
+    }, 1000);
+  }
+
   init() {
     const {
       addTaskBtn,
@@ -790,6 +804,8 @@ class UI {
       sidebarContainer,
       searchBtn,
     } = this.#loadSelector();
+
+    this.#displayTimer();
 
     listenEvent(
       document,

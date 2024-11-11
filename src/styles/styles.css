@@ -203,6 +203,21 @@ aside div span {
   background-color: #dfdbdb;
 }
 
+.tasks-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timer {
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-right: 15px;
+  padding: 10px;
+  box-shadow: inset 2px 2px 5px #bcbcbc, -2px -2px 5px #ffffff,
+    2px 2px 5px #bcbcbc;
+}
+
 .tasks-section-title {
   width: fit-content;
   font-size: 1.05rem;
