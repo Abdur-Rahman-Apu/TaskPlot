@@ -664,6 +664,8 @@ class UI {
   }
 
   #populateUIBasedOnQueryParams() {
+    const { searchInput } = this.#loadSelector();
+
     const url = new URL(location.href);
     const category = url.searchParams.get("category");
     const search = url.searchParams.get("search");
@@ -673,6 +675,7 @@ class UI {
       this.#updateDataBasedOnCategory(category);
 
       if (search) {
+        searchInput.value = search;
         const tasks = data.displayTasks;
         const filteredTasks = tasks.filter((task) =>
           task.title.toLowerCase().includes(search.toLowerCase())
