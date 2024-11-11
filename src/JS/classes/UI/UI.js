@@ -343,6 +343,15 @@ class UI {
       data.displayTasks = data.allTasks;
     }
 
+    if (action === "delete") {
+      const taskId = taskData?.id;
+      const allTaskData = data.allTasks;
+      const filteredData = allTaskData.filter((task) => task.id != taskId);
+      data.emptyAllTasks = [];
+      data.allTasks = filteredData;
+      data.displayTasks = data.allTasks;
+    }
+
     storage.setIntoStorage(data.allTasks);
   }
 
@@ -405,6 +414,7 @@ class UI {
     taskActionBtn.dataset.id = taskId;
 
     deleteTaskBtn.classList.remove("hidden");
+    deleteTaskBtn.dataset.id = taskId;
 
     const taskDetails = data.allTasks.find((task) => task.id == taskId);
 
@@ -426,7 +436,16 @@ class UI {
     this.#populateTaskData({ action: "edit", taskId });
   }
 
-  #handleDeleteTask() {}
+  #handleDeleteTask({ taskId }) {
+    console.log("delete", taskId);
+    const taskData = { id: taskId };
+    this.#populateDataStorage({ taskData, action: "delete" });
+
+    this.#displayTasks();
+    this.#displayToastMsg("delete");
+    this.#handleCloseModal();
+    this.#emptyModalInputs();
+  }
 
   #handleModalActions(e) {
     console.log(e.target);
@@ -441,6 +460,11 @@ class UI {
       case "edit":
         this.#handleEditTask({ taskId: e.target.dataset.id });
         break;
+
+      case "delete":
+        this.#handleDeleteTask({ taskId: e.target.dataset.id });
+        break;
+
       case "cancel":
         this.#handleCloseModal();
         break;
