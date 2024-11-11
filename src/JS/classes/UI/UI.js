@@ -687,6 +687,34 @@ class UI {
     }
   }
 
+  #updateActiveCategoryInSidebar() {
+    const url = new URL(location.href);
+    const category = url.searchParams.get("category");
+    let elm;
+    switch (category) {
+      case "all":
+        elm = document.querySelector(".all-tasks");
+
+        break;
+
+      case "new":
+        elm = document.querySelector(".new-tasks");
+
+        break;
+
+      case "inProgress":
+        elm = document.querySelector(".in-progress-tasks");
+
+        break;
+      case "complete":
+        elm = document.querySelector(".complete-tasks");
+
+        break;
+    }
+
+    elm.classList.add("active");
+  }
+
   #populateUIBasedOnQueryParams() {
     const { searchInput } = this.#loadSelector();
 
@@ -696,6 +724,7 @@ class UI {
     console.log(category, search, "cs");
 
     if (category) {
+      this.#updateActiveCategoryInSidebar(category);
       this.#updateDataBasedOnCategory(category);
 
       if (search) {
@@ -745,6 +774,7 @@ class UI {
     }
     this.#populateUIBasedOnQueryParams();
     this.#populateUIOfTaskCount();
+    this.#updateActiveCategoryInSidebar();
   }
 
   init() {
