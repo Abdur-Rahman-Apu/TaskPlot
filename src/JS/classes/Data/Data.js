@@ -7,6 +7,10 @@ class Data {
       ? [...this.#allTasks, ...data]
       : [...this.#allTasks, data];
   }
+
+  set emptyAllTasks(data) {
+    this.#allTasks = data;
+  }
   get allTasks() {
     return this.#allTasks;
   }

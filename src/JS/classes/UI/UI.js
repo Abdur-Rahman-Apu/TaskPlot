@@ -18,6 +18,7 @@ class UI {
     const taskModalContainer = selectElm(".task-modal-section");
     const modalCloseIcon = selectElm(".task-modal .close-icon");
 
+    const taskModal = selectElm(".task-modal");
     const taskModalBody = selectElm(".task-modal-body");
     const taskTitleInput = selectElm("#task-title");
     const taskDescriptionInput = selectElm("#task-description");
@@ -52,6 +53,7 @@ class UI {
       taskActionName,
       deleteTaskBtn,
       taskActionBtn,
+      taskModal,
     };
   }
 
@@ -294,6 +296,7 @@ class UI {
     taskActionName.innerText = "Create a New Task";
     taskActionBtn.innerText = "Create Task";
     taskActionBtn.dataset.action = "create";
+    delete taskActionBtn.dataset.id;
 
     console.log(deleteTaskBtn);
     console.log(deleteTaskBtn.classLists);
@@ -303,9 +306,31 @@ class UI {
     }
   }
 
-  #handleAddNewTask() {
-    this.#updateUIForNewTask();
-    console.log("add new task");
+  #populateDataStorage({ taskData, action }) {
+    console.log(taskData, action);
+    if (action === "new") {
+      data.allTasks = taskData;
+      data.displayTasks = data.allTasks;
+    }
+
+    if (action === "edit") {
+      const taskId = taskData?.id;
+      const allTaskData = data.allTasks;
+      const findIndex = allTaskData.findIndex((task) => task.id == taskId);
+      console.log(findIndex, "findindex");
+      if (findIndex !== -1) {
+        allTaskData[findIndex] = taskData;
+      }
+
+      data.emptyAllTasks = [];
+      data.allTasks = allTaskData;
+      data.displayTasks = data.allTasks;
+    }
+
+    storage.setIntoStorage(data.allTasks);
+  }
+
+  #populateTaskData({ action, taskId }) {
     const {
       taskTitleInput,
       taskDescriptionInput,
@@ -319,7 +344,7 @@ class UI {
     if (!isSuccessValidation) return;
 
     const taskData = {
-      id: this.#getId(),
+      id: action === "new" ? this.#getId() : Number(taskId),
       title: taskTitleInput?.value,
       description: taskDescriptionInput?.value,
       teamName: teamNameInput?.value,
@@ -328,14 +353,23 @@ class UI {
       teamPic: this.#getRandomTeamPic(),
     };
 
-    data.allTasks = taskData;
-    data.displayTasks = data.allTasks;
-    storage.setIntoStorage(data.allTasks);
+    this.#populateDataStorage({ taskData, action });
 
     this.#displayTasks();
     this.#displayToastMsg("Added a new task");
     this.#handleCloseModal();
     this.#emptyModalInputs();
+  }
+
+  #handleAddNewTask() {
+    this.#updateUIForNewTask();
+    console.log("add new task");
+    this.#populateTaskData({ action: "new" });
+  }
+
+  #handleOpenModalForNewTask() {
+    this.#updateUIForNewTask();
+    this.#handleOpenModal();
   }
 
   #updateUIForEditTask({ taskId }) {
@@ -351,6 +385,7 @@ class UI {
     } = this.#loadSelector();
 
     taskActionName.innerText = "Edit Task";
+    taskActionBtn.dataset.id = taskId;
 
     deleteTaskBtn.classList.remove("hidden");
 
@@ -368,18 +403,26 @@ class UI {
     taskActionBtn.dataset.action = "edit";
   }
 
-  #handleEditTask() {
-    this.#updateUIForEditTask();
+  #handleEditTask({ taskId }) {
+    // this.#updateUIForEditTask();
+    console.log(taskId);
+    this.#populateTaskData({ action: "edit", taskId });
   }
+
   #handleDeleteTask() {}
 
   #handleModalActions(e) {
+    console.log(e.target);
     const action = e.target.dataset.action;
     console.log(action);
 
     switch (action) {
       case "create":
         this.#handleAddNewTask();
+        break;
+
+      case "edit":
+        this.#handleEditTask({ taskId: e.target.dataset.id });
         break;
       case "cancel":
         this.#handleCloseModal();
@@ -414,7 +457,9 @@ class UI {
   }
 
   #handleCloseModal(e) {
-    const { taskModalContainer } = this.#loadSelector();
+    const { taskModalContainer, taskModal } = this.#loadSelector();
+
+    taskModal.scroll(0, 0);
 
     addStyle(taskModalContainer, { display: "none" });
 
@@ -470,7 +515,11 @@ class UI {
       this.#handleDisplayInitialTasks.bind(this)
     );
 
-    listenEvent(addTaskBtn, "click", this.#handleOpenModal.bind(this));
+    listenEvent(
+      addTaskBtn,
+      "click",
+      this.#handleOpenModalForNewTask.bind(this)
+    );
 
     listenEvent(modalCloseIcon, "click", this.#handleCloseModal.bind(this));
 
