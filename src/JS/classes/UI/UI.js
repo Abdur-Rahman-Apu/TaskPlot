@@ -29,6 +29,9 @@ class UI {
     const toastContainer = selectElm(".toast-section");
     const toastMsg = selectElm(".toast-message");
     const tasksCardContainer = selectElm(".tasks");
+    const tasksSectionTitle = selectElm(".tasks-section-title");
+    const taskActionName = selectElm(".task-action-name");
+    const deleteTaskBtn = selectElm(".delete-task");
 
     return {
       addTaskBtn,
@@ -44,6 +47,9 @@ class UI {
       toastContainer,
       toastMsg,
       tasksCardContainer,
+      tasksSectionTitle,
+      taskActionName,
+      deleteTaskBtn,
     };
   }
 
@@ -99,11 +105,10 @@ class UI {
       ? tasks.map((task) => {
           console.log(task);
           console.log(task, "team pic");
-          return `<div class="task-card" data-id="${task?.id}">
-          <div class="task-card-left-side">
+          return `<div class="task-card view-card" data-id="${task?.id}">
+          <div class="task-card-left-side" data-id="${task?.id}">
             <p class="task-title">${task?.title}</p>
-            <p class="task-type">${task?.teamName}</p>
-
+            <p class="task-team-name">${task?.teamName}</p>
             <div class="team">
               <p class="team-title">Team</p>
               <div class="team-img">
@@ -280,7 +285,21 @@ class UI {
     return teamPicArr;
   }
 
+  #updateUIForNewTask() {
+    const { taskActionName, deleteTaskBtn } = this.#loadSelector();
+
+    taskActionName.innerText = "Create a New Task";
+
+    console.log(deleteTaskBtn);
+    console.log(deleteTaskBtn.classLists);
+
+    if (!deleteTaskBtn.classList.contains("hidden")) {
+      deleteTaskBtn.classList.add("hidden");
+    }
+  }
+
   #handleAddNewTask() {
+    this.#updateUIForNewTask();
     console.log("add new task");
     const {
       taskTitleInput,
@@ -314,7 +333,16 @@ class UI {
     this.#emptyModalInputs();
   }
 
-  #handleEditTask() {}
+  #updateUIForEditTask() {
+    const { taskActionName, deleteTaskBtn } = this.#loadSelector();
+
+    taskActionName.innerText = "Edit Task";
+
+    deleteTaskBtn.classList.remove("hidden");
+  }
+  #handleEditTask() {
+    this.#updateUIForEditTask();
+  }
   #handleDeleteTask() {}
 
   #handleModalActions(e) {
@@ -334,6 +362,23 @@ class UI {
     }
   }
 
+  #emptyAllReqMsgOfInputs() {
+    const {
+      taskTitleInput,
+      taskDescriptionInput,
+      teamNameInput,
+      deadLineInput,
+    } = this.#loadSelector();
+    const inputArr = [
+      taskTitleInput,
+      taskDescriptionInput,
+      teamNameInput,
+      deadLineInput,
+    ];
+
+    inputArr.forEach((input) => this.#hideInputRequiredMsg(input));
+  }
+
   #handleOpenModal(e) {
     const { taskModalContainer } = this.#loadSelector();
 
@@ -346,6 +391,19 @@ class UI {
     addStyle(taskModalContainer, { display: "none" });
 
     this.#emptyModalInputs();
+    this.#emptyAllReqMsgOfInputs();
+  }
+
+  #handleTaskCardView(e) {
+    console.log(e.target);
+    const targetElm = e.target;
+
+    if (targetElm.classLists.contains("add-new-task")) {
+      console.log("Add new task");
+    }
+    if (targetElm.classLists.contains("view-task")) {
+      console.log("view task");
+    }
   }
 
   #handleDisplayInitialTasks() {
@@ -367,6 +425,7 @@ class UI {
       modalActionsContainer,
       taskModalBody,
       deadLineInput,
+      tasksCardContainer,
     } = this.#loadSelector();
 
     listenEvent(
@@ -402,6 +461,11 @@ class UI {
       "click",
       this.#handleModalActions.bind(this)
     );
+    // listenEvent(
+    //   document.querySelector(".task-card"),
+    //   "click",
+    //   this.#handleTaskCardView.bind(this)
+    // );
   }
 }
 
