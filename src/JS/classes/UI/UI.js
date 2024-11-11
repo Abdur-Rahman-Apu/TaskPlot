@@ -14,6 +14,11 @@ import storage from "../Storage/Storage";
 
 class UI {
   #loadSelector() {
+    const allTaskCountElm = selectElm(".all-task-count");
+    const newTaskCountElm = selectElm(".new-task-count");
+    const inProgressTaskCountElm = selectElm(".in-progress-task-count");
+    const completeTaskCountElm = selectElm(".complete-task-count");
+
     const addTaskBtn = selectElm(".add-task-btn");
     const taskModalContainer = selectElm(".task-modal-section");
     const modalCloseIcon = selectElm(".task-modal .close-icon");
@@ -54,6 +59,10 @@ class UI {
       deleteTaskBtn,
       taskActionBtn,
       taskModal,
+      allTaskCountElm,
+      newTaskCountElm,
+      inProgressTaskCountElm,
+      completeTaskCountElm,
     };
   }
 
@@ -179,8 +188,33 @@ class UI {
     tasksCardContainer.innerHTML = taskCardsHTML;
   }
 
+  #populateUIOfTaskCount() {
+    const {
+      allTaskCountElm,
+      newTaskCountElm,
+      inProgressTaskCountElm,
+      completeTaskCountElm,
+    } = this.#loadSelector();
+
+    const allTasks = data.allTasks;
+
+    const newTasks = allTasks?.filter((task) => task.progress == 0);
+
+    const inProgressTasks = allTasks?.filter(
+      (task) => task.progress > 0 && task.progress < 100
+    );
+
+    const completedTasks = allTasks?.filter((task) => task.progress == 100);
+
+    allTaskCountElm.innerText = allTasks?.length ?? 0;
+    newTaskCountElm.innerText = newTasks?.length ?? 0;
+    inProgressTaskCountElm.innerText = inProgressTasks?.length ?? 0;
+    completeTaskCountElm.innerText = completedTasks?.length ?? 0;
+  }
+
   #populateUIAfterTaskUpdated({ action }) {
     this.#displayTasks();
+    this.#populateUIOfTaskCount();
     this.#displayToastMsg(action);
     this.#handleCloseModal();
     this.#emptyModalInputs();
@@ -536,6 +570,7 @@ class UI {
       data.displayTasks = data.allTasks;
     }
     this.#displayTasks();
+    this.#populateUIOfTaskCount();
   }
 
   init() {
