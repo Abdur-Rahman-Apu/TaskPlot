@@ -588,10 +588,12 @@ class UI {
     });
   }
 
-  #populateURL({ query, value }) {
+  #populateURL({ query, value, action }) {
     const url = new URL(location.href);
     url.searchParams.delete(query);
-    url.searchParams.set(query, value);
+    if (action === "set") {
+      url.searchParams.set(query, value);
+    }
     console.log(url);
     history.pushState(null, "", url);
   }
@@ -599,7 +601,11 @@ class UI {
   #populateUIForChangingCategory({ categoryName, classes }) {
     this.#removePreviousActiveCategoryClass();
     classes.add("active");
-    this.#populateURL({ query: "category", value: categoryName });
+    this.#populateURL({
+      query: "category",
+      value: categoryName,
+      action: "set",
+    });
 
     const { allTasks, newTasks, inProgressTasks, completedTasks } =
       this.#getTasksCategoryWise();
@@ -657,6 +663,22 @@ class UI {
 
   #handleSearchTask() {
     console.log("clicked");
+    const { searchInput } = this.#loadSelector();
+    const searchValue = searchInput.value;
+
+    if (searchValue) {
+      this.#populateURL({
+        query: "search",
+        value: searchValue,
+        action: "set",
+      });
+    } else {
+      this.#populateURL({
+        query: "search",
+        value: searchValue,
+        action: "delete",
+      });
+    }
   }
 
   #handleDisplayInitialTasks() {
