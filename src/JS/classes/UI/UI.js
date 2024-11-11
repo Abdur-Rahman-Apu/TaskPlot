@@ -32,6 +32,7 @@ class UI {
     const tasksSectionTitle = selectElm(".tasks-section-title");
     const taskActionName = selectElm(".task-action-name");
     const deleteTaskBtn = selectElm(".delete-task");
+    const taskActionBtn = selectElm(".task-action");
 
     return {
       addTaskBtn,
@@ -50,6 +51,7 @@ class UI {
       tasksSectionTitle,
       taskActionName,
       deleteTaskBtn,
+      taskActionBtn,
     };
   }
 
@@ -286,9 +288,12 @@ class UI {
   }
 
   #updateUIForNewTask() {
-    const { taskActionName, deleteTaskBtn } = this.#loadSelector();
+    const { taskActionName, deleteTaskBtn, taskActionBtn } =
+      this.#loadSelector();
 
     taskActionName.innerText = "Create a New Task";
+    taskActionBtn.innerText = "Create Task";
+    taskActionBtn.dataset.action = "create";
 
     console.log(deleteTaskBtn);
     console.log(deleteTaskBtn.classLists);
@@ -342,6 +347,7 @@ class UI {
       teamNameInput,
       progressInput,
       deadLineInput,
+      taskActionBtn,
     } = this.#loadSelector();
 
     taskActionName.innerText = "Edit Task";
@@ -357,6 +363,9 @@ class UI {
     teamNameInput.value = taskDetails?.teamName;
     deadLineInput.value = this.#getDesiredDeadLineFormat(taskDetails?.deadline);
     progressInput.value = taskDetails?.progress;
+
+    taskActionBtn.innerText = "Edit Task";
+    taskActionBtn.dataset.action = "edit";
   }
 
   #handleEditTask() {
