@@ -14,6 +14,9 @@ import storage from "../Storage/Storage";
 
 class UI {
   #loadSelector() {
+    const searchInput = selectElm("#search");
+    const searchBtn = selectElm(".search-btn");
+
     const sidebarContainer = selectElm("aside");
     const allTaskCountElm = selectElm(".all-task-count");
     const newTaskCountElm = selectElm(".new-task-count");
@@ -65,6 +68,8 @@ class UI {
       inProgressTaskCountElm,
       completeTaskCountElm,
       sidebarContainer,
+      searchInput,
+      searchBtn,
     };
   }
 
@@ -650,6 +655,10 @@ class UI {
     }
   }
 
+  #handleSearchTask() {
+    console.log("clicked");
+  }
+
   #handleDisplayInitialTasks() {
     window.history.replaceState({}, document.title, "tasks?category=all");
     const tasks = storage.getFromStorage();
@@ -672,6 +681,7 @@ class UI {
       deadLineInput,
       tasksCardContainer,
       sidebarContainer,
+      searchBtn,
     } = this.#loadSelector();
 
     listenEvent(
@@ -680,6 +690,7 @@ class UI {
       this.#handleDisplayInitialTasks.bind(this)
     );
 
+    listenEvent(searchBtn, "click", this.#handleSearchTask.bind(this));
     listenEvent(
       addTaskBtn,
       "click",
