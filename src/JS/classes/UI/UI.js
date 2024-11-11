@@ -679,6 +679,8 @@ class UI {
         );
         data.displayTasks = filteredTasks;
       }
+    } else {
+      window.history.replaceState({}, document.title, "tasks?category=all");
     }
 
     console.log(data.displayTasks);
@@ -709,13 +711,12 @@ class UI {
   }
 
   #handleDisplayInitialTasks() {
-    window.history.replaceState({}, document.title, "tasks?category=all");
     const tasks = storage.getFromStorage();
     if (tasks && tasks?.length) {
       data.allTasks = tasks;
       data.displayTasks = data.allTasks;
     }
-    this.#displayTasks();
+    this.#populateUIBasedOnQueryParams();
     this.#populateUIOfTaskCount();
   }
 
