@@ -333,13 +333,32 @@ class UI {
     this.#emptyModalInputs();
   }
 
-  #updateUIForEditTask() {
-    const { taskActionName, deleteTaskBtn } = this.#loadSelector();
+  #updateUIForEditTask({ taskId }) {
+    const {
+      taskActionName,
+      deleteTaskBtn,
+      taskTitleInput,
+      taskDescriptionInput,
+      teamNameInput,
+      progressInput,
+      deadLineInput,
+    } = this.#loadSelector();
 
     taskActionName.innerText = "Edit Task";
 
     deleteTaskBtn.classList.remove("hidden");
+
+    const taskDetails = data.allTasks.find((task) => task.id == taskId);
+
+    console.log(taskDetails, "task details");
+
+    taskTitleInput.value = taskDetails?.title;
+    taskDescriptionInput.value = taskDetails?.description;
+    teamNameInput.value = taskDetails?.teamName;
+    deadLineInput.value = this.#getDesiredDeadLineFormat(taskDetails?.deadline);
+    progressInput.value = taskDetails?.progress;
   }
+
   #handleEditTask() {
     this.#updateUIForEditTask();
   }
@@ -408,7 +427,8 @@ class UI {
       }
       if (taskCardContainer.classList.contains("view-card")) {
         console.log("view task");
-        this.#updateUIForEditTask();
+        const taskId = taskCardContainer.dataset.id;
+        this.#updateUIForEditTask({ taskId });
       }
     }
   }
