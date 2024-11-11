@@ -583,15 +583,38 @@ class UI {
     });
   }
 
-  #populateUIForChangingCategory(category) {
-    this.#removePreviousActiveCategoryClass();
+  #populateURL({ query, value }) {
     const url = new URL(location.href);
-    url.searchParams.delete("category");
-
-    url.searchParams.set("category", category);
-
+    url.searchParams.delete(query);
+    url.searchParams.set(query, value);
     console.log(url);
     history.pushState(null, "", url);
+  }
+
+  #populateUIForChangingCategory({ categoryName, classes }) {
+    this.#removePreviousActiveCategoryClass();
+    classes.add("active");
+    this.#populateURL({ query: "category", value: categoryName });
+
+    const { allTasks, newTasks, inProgressTasks, completedTasks } =
+      this.#getTasksCategoryWise();
+
+    switch (categoryName) {
+      case "all":
+        data.displayTasks = allTasks;
+        break;
+      case "new":
+        data.displayTasks = newTasks;
+        break;
+      case "inProgress":
+        data.displayTasks = inProgressTasks;
+        break;
+      case "complete":
+        data.displayTasks = completedTasks;
+        break;
+    }
+
+    this.#displayTasks();
   }
 
   #handleChangeTaskCategory(e) {
@@ -604,20 +627,25 @@ class UI {
       console.log(classes);
 
       if (classes.contains("all-tasks") && !classes.contains("active")) {
-        this.#removePreviousActiveCategoryClass();
+        this.#populateUIForChangingCategory({ categoryName: "all", classes });
       }
       if (classes.contains("new-tasks") && !classes.contains("active")) {
-        this.#populateUIForChangingCategory();
-        classes.add("active");
+        this.#populateUIForChangingCategory({ categoryName: "new", classes });
       }
       if (
         classes.contains("in-progress-tasks") &&
         !classes.contains("active")
       ) {
-        this.#removePreviousActiveCategoryClass();
+        this.#populateUIForChangingCategory({
+          categoryName: "inProgress",
+          classes,
+        });
       }
       if (classes.contains("complete-tasks") && !classes.contains("active")) {
-        this.#removePreviousActiveCategoryClass();
+        this.#populateUIForChangingCategory({
+          categoryName: "complete",
+          classes,
+        });
       }
     }
   }
