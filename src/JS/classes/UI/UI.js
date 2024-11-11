@@ -179,6 +179,13 @@ class UI {
     tasksCardContainer.innerHTML = taskCardsHTML;
   }
 
+  #populateUIAfterTaskUpdated({ action }) {
+    this.#displayTasks();
+    this.#displayToastMsg(action);
+    this.#handleCloseModal();
+    this.#emptyModalInputs();
+  }
+
   #handleHideDeadlineErrMsg(e) {
     console.log(e.target, "handleHidedeadlei");
     console.log(e.target.value);
@@ -380,11 +387,7 @@ class UI {
 
     this.#populateDataStorage({ taskData, action });
 
-    this.#displayTasks();
-
-    this.#displayToastMsg(action);
-    this.#handleCloseModal();
-    this.#emptyModalInputs();
+    this.#populateUIAfterTaskUpdated({ action });
   }
 
   #handleAddNewTask() {
@@ -441,10 +444,7 @@ class UI {
     const taskData = { id: taskId };
     this.#populateDataStorage({ taskData, action: "delete" });
 
-    this.#displayTasks();
-    this.#displayToastMsg("delete");
-    this.#handleCloseModal();
-    this.#emptyModalInputs();
+    this.#populateUIAfterTaskUpdated({ action: "delete" });
   }
 
   #handleModalActions(e) {

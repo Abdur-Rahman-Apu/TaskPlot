@@ -244,6 +244,7 @@ aside div span {
 }
 
 .task-title {
+  text-transform: capitalize;
   font-size: 1.2rem;
   font-weight: 900;
   margin-bottom: 8px;
