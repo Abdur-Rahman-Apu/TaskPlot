@@ -293,7 +293,7 @@ class UI {
     console.log(deleteTaskBtn);
     console.log(deleteTaskBtn.classLists);
 
-    if (!deleteTaskBtn.classList.contains("hidden")) {
+    if (!deleteTaskBtn?.classList.contains("hidden")) {
       deleteTaskBtn.classList.add("hidden");
     }
   }
@@ -397,12 +397,19 @@ class UI {
   #handleTaskCardView(e) {
     console.log(e.target);
     const targetElm = e.target;
+    console.log(e.target.closest(".task-card"));
+    const taskCardContainer = targetElm.closest(".task-card");
 
-    if (targetElm.classLists.contains("add-new-task")) {
-      console.log("Add new task");
-    }
-    if (targetElm.classLists.contains("view-task")) {
-      console.log("view task");
+    if (taskCardContainer) {
+      this.#handleOpenModal();
+      if (taskCardContainer.classList.contains("add-new-task")) {
+        console.log("Add new task");
+        this.#updateUIForNewTask();
+      }
+      if (taskCardContainer.classList.contains("view-card")) {
+        console.log("view task");
+        this.#updateUIForEditTask();
+      }
     }
   }
 
@@ -456,16 +463,12 @@ class UI {
       "click",
       this.#handleModalActions.bind(this)
     );
+
     listenEvent(
-      modalActionsContainer,
+      tasksCardContainer,
       "click",
-      this.#handleModalActions.bind(this)
+      this.#handleTaskCardView.bind(this)
     );
-    // listenEvent(
-    //   document.querySelector(".task-card"),
-    //   "click",
-    //   this.#handleTaskCardView.bind(this)
-    // );
   }
 }
 
