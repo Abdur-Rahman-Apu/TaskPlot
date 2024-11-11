@@ -79,7 +79,7 @@ nav {
   width: 220px;
   padding: 8px 12px;
   border-radius: 10px;
-  background: #dfdede;
+  background: var(--secondary-color);
   box-shadow: 20px 20px 50px #bebebe, -5px -5px 5px #ffffff;
   display: none;
 }
@@ -92,7 +92,7 @@ nav {
 .greetings .greetings-subtitle {
   font-size: 0.9rem;
   margin-top: 2px;
-  color: var(--gray-color);
+  color: var(--black-color);
 }
 
 .user-avatar:hover .greetings {
@@ -122,10 +122,13 @@ nav {
   align-items: center;
   color: #fff;
   border-radius: 5px;
-  box-shadow: 4px 4px 10px #cdc6c6, -4px -4px 10px #e7e4e4;
+  box-shadow: 4px 4px 4px #cdc6c6, -4px -4px 4px #e7e4e4;
   cursor: pointer;
 }
 
+.add-task-btn:hover {
+  box-shadow: none;
+}
 /* main part design start  */
 main {
   display: flex;
