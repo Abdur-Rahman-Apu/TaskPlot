@@ -598,15 +598,7 @@ class UI {
     history.pushState(null, "", url);
   }
 
-  #populateUIForChangingCategory({ categoryName, classes }) {
-    this.#removePreviousActiveCategoryClass();
-    classes.add("active");
-    this.#populateURL({
-      query: "category",
-      value: categoryName,
-      action: "set",
-    });
-
+  #updateDataBasedOnCategory(categoryName) {
     const { allTasks, newTasks, inProgressTasks, completedTasks } =
       this.#getTasksCategoryWise();
 
@@ -624,8 +616,18 @@ class UI {
         data.displayTasks = completedTasks;
         break;
     }
+  }
 
-    this.#displayTasks();
+  #populateUIForChangingCategory({ categoryName, classes }) {
+    this.#removePreviousActiveCategoryClass();
+    classes.add("active");
+    this.#populateURL({
+      query: "category",
+      value: categoryName,
+      action: "set",
+    });
+
+    this.#populateUIBasedOnQueryParams();
   }
 
   #handleChangeTaskCategory(e) {
@@ -661,6 +663,29 @@ class UI {
     }
   }
 
+  #populateUIBasedOnQueryParams() {
+    const url = new URL(location.href);
+    const category = url.searchParams.get("category");
+    const search = url.searchParams.get("search");
+    console.log(category, search, "cs");
+
+    if (category) {
+      this.#updateDataBasedOnCategory(category);
+
+      if (search) {
+        const tasks = data.displayTasks;
+        const filteredTasks = tasks.filter((task) =>
+          task.title.toLowerCase().includes(search.toLowerCase())
+        );
+        data.displayTasks = filteredTasks;
+      }
+    }
+
+    console.log(data.displayTasks);
+
+    this.#displayTasks();
+  }
+
   #handleSearchTask() {
     console.log("clicked");
     const { searchInput } = this.#loadSelector();
@@ -679,6 +704,8 @@ class UI {
         action: "delete",
       });
     }
+
+    this.#populateUIBasedOnQueryParams();
   }
 
   #handleDisplayInitialTasks() {
