@@ -63,7 +63,7 @@ nav {
 }
 
 .date-container {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 10px;
   font-size: 0.9rem;
