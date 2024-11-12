@@ -811,6 +811,9 @@ class UI {
     } else {
       // if url has no category query params then update the url
       window.history.replaceState({}, document.title, "tasks?category=all");
+
+      // update style of the current category's div
+      this.#updateActiveCategoryInSidebar("all");
     }
 
     // display tasks into the UI
