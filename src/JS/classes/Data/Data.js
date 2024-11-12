@@ -1,4 +1,5 @@
 class Data {
+  // private variables
   #allTasks = [];
   #displayTasks;
 
