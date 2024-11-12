@@ -1,6 +1,6 @@
 # 📝 "TaskPlot: A Task Management Application"
 
-![Project Status](https://img.shields.io/badge/Status-Completed-green) ![JavaScript](https://img.shields.io/badge/Built_with-JavaScript-yellow) ![HTML](https://img.shields.io/badge/Built_with-HTML-red) ![CSS](https://img.shields.io/badge/Built_with-CSS-blue) ![Parcel](https://img.shields.io/badge/Bundler-Parcel-purple) ![Design Pattern: OOP](https://img.shields.io/badge/Design%20Pattern-OOP-blue)
+![Project Status](https://img.shields.io/badge/Status-Completed-green) ![JavaScript](https://img.shields.io/badge/Built_with-JavaScript-yellow) ![HTML](https://img.shields.io/badge/Built_with-HTML-red) ![CSS](https://img.shields.io/badge/Built_with-CSS-blue) ![Parcel](https://img.shields.io/badge/Bundler-Parcel-purple) ![Design Pattern: OOP](https://img.shields.io/badge/Design%20Pattern-OOP-blue) [![Netlify Status](https://api.netlify.com/api/v1/badges/3b295c23-0797-4f8b-beb1-a3132b2ca3ec/deploy-status)](https://app.netlify.com/sites/task-plot/deploys)
 
 ## 📌 Overview
 
@@ -10,7 +10,7 @@ This **Task Management Application** helps users efficiently manage their tasks 
 
 ## 🌐 Live Link
 
-Check out the live application here: [TaskPlot Live](https://your-live-link.com)
+Check out the live application here: [TaskPlot Live](https://task-plot.netlify.app/)
 
 ---
 
