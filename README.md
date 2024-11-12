@@ -2,20 +2,6 @@
 
 ![Project Status](https://img.shields.io/badge/Status-Completed-green) ![JavaScript](https://img.shields.io/badge/Built_with-JavaScript-yellow) ![HTML](https://img.shields.io/badge/Built_with-HTML-red) ![CSS](https://img.shields.io/badge/Built_with-CSS-blue) ![Parcel](https://img.shields.io/badge/Bundler-Parcel-purple) ![Design Pattern: OOP](https://img.shields.io/badge/Design%20Pattern-OOP-blue)
 
-## 📄 Table of Contents
-
-- [Overview](#overview)
-- [Live Link](#live-link)
-- [Screenshots](#screenshots)
-- [Features](#features)
-- [Technologies](#technologies)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
-- [GiveStar](#giveastar)
-- [License](#license)
-
 ## 📌 Overview
 
 This **Task Management Application** helps users efficiently manage their tasks by categorizing them into **All, New, In Progress,** and **Completed** sections. Built using **HTML, CSS, JavaScript**, and bundled with **Parcel**, this application follows an **OOP design pattern** and uses **local storage** for data persistence.
