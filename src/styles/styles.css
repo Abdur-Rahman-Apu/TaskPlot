@@ -68,6 +68,7 @@ nav {
 
 .date-container {
   font-size: 0.9rem;
+  display: none;
 }
 
 .date {
@@ -97,6 +98,7 @@ nav {
   background: var(--secondary-color);
   box-shadow: 20px 20px 50px #bebebe, -5px -5px 5px #ffffff;
   display: none;
+  z-index: 1000;
 }
 
 .greetings .greetings-title {
@@ -412,7 +414,8 @@ aside div span {
 .task-modal {
   /* width: 40%; */
   width: 90%;
-  height: 740px;
+  height: 90%;
+  /* height: 740px; */
   background-color: var(--secondary-color);
   box-shadow: 20px 20px 60px #4f4f4f;
   border-radius: 8px;
@@ -565,7 +568,7 @@ aside div span {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 5%;
   transform: translateX(-50%);

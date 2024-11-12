@@ -795,12 +795,13 @@ class UI {
     setInterval(() => {
       const date = new Date();
       const localTime = date.toLocaleTimeString();
-      console.log(localTime, "local time");
+
       timeShowELm.innerText = localTime;
     }, 1000);
   }
 
   init() {
+    console.log(window.screenX);
     const {
       addTaskBtn,
       taskModalContainer,
