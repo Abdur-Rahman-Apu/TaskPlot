@@ -785,9 +785,11 @@ class UI {
 
   #displayDate() {
     const { dateShowELm } = this.#loadSelector();
-    const date = new Date();
-    const localDate = date.toUTCString().slice(0, 16);
-    dateShowELm.innerText = localDate;
+    setInterval(() => {
+      const date = new Date();
+      const localDate = date.toUTCString().slice(0, 16);
+      dateShowELm.innerText = localDate;
+    }, 3600 * 1000);
   }
 
   #displayTimer() {
@@ -801,7 +803,6 @@ class UI {
   }
 
   init() {
-    console.log(window.screenX);
     const {
       addTaskBtn,
       taskModalContainer,
