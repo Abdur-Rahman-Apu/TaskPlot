@@ -6,9 +6,13 @@
 
 This **Task Management Application** helps users efficiently manage their tasks by categorizing them into **All, New, In Progress,** and **Completed** sections. Built using **HTML, CSS, JavaScript**, and bundled with **Parcel**, this application follows an **OOP design pattern** and uses **local storage** for data persistence.
 
+---
+
 ## 🌐 Live Link
 
 Check out the live application here: [TaskPlot Live](https://your-live-link.com)
+
+---
 
 ## 📸 Screenshots
 
@@ -16,6 +20,8 @@ Check out the live application here: [TaskPlot Live](https://your-live-link.com)
 | ----------- | ----------------------------------------------------- |
 | **Mobile**  | ![Mobile View](./src/assets/screenshots/mobile.png)   |
 | **Desktop** | ![Desktop View](./src/assets/screenshots/desktop.png) |
+
+---
 
 ## 🌟 Features
 
@@ -27,6 +33,8 @@ Check out the live application here: [TaskPlot Live](https://your-live-link.com)
 - **Responsive Design:** Designed to be responsive across various devices.
 - **The application follows an Object-Oriented Programming (OOP) design pattern.**
 
+---
+
 ## 💻 Technologies
 
 | Technology | Description                                    |
@@ -35,6 +43,8 @@ Check out the live application here: [TaskPlot Live](https://your-live-link.com)
 | CSS        | Styling for responsive, user-friendly UI       |
 | JavaScript | Programming language for functionality         |
 | Parcel     | Bundler for efficient loading and optimization |
+
+---
 
 ## 🚀 Installation
 
@@ -51,9 +61,12 @@ Check out the live application here: [TaskPlot Live](https://your-live-link.com)
    npm install
    ```
 4. Start the application:
+
    ```bash
    npm start
    ```
+
+---
 
 ## 🛠️ Usage
 
@@ -63,12 +76,16 @@ Check out the live application here: [TaskPlot Live](https://your-live-link.com)
 4. **Viewing by Category:** Use the category filter to view tasks by status.
 5. **Search:** Enter keywords in the search bar to find tasks by title.
 
+---
+
 ## 👤 Author
 
 **Abdur Rahman Apu**
 
 - LinkedIn: [Abdur Rahman Apu](https://www.linkedin.com/in/abdur-rahman-apu/)
 - GitHub: [Abdur-Rahman-Apu](https://github.com/Abdur-Rahman-Apu)
+
+---
 
 ## 🙏 Acknowledgments
 
@@ -78,9 +95,13 @@ Special thanks to:
 - **Parcel** for offering an easy-to-use bundling solution.
 - All contributors to open-source libraries that made this project possible.
 
+---
+
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
 
 ## ⭐ Give a Star
 
