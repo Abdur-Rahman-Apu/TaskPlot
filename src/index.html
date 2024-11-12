@@ -27,236 +27,206 @@
 
 <body>
 
+    <!-- nav start  -->
     <nav>
+        <!-- navbar left side start  -->
         <div class="left-side">
+            <!-- logo  -->
             <div class="logo">
                 <img src="./assets/logo.png" alt="This image is the logo of the application">
             </div>
+            <!-- title  -->
             <p class="title">Task<span>Plot</span></p>
         </div>
+        <!-- navbar left side end  -->
+
+        <!-- navbar right side start  -->
         <div class="right-side">
 
+            <!-- date part start  -->
             <div class="date-container">
                 <i class="fa-solid fa-calendar-days"></i>
                 <p class="date">Wed, 11 Nov, 2024</p>
             </div>
+            <!-- date part end  -->
 
+            <!-- search task start  -->
             <div class="search-task">
+                <!-- search input  -->
                 <input type="search" name="search" id="search" placeholder="Search tasks...">
 
+                <!-- search button  -->
                 <div class="search-btn">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
+            <!-- search task end  -->
 
+            <!-- add task button start  -->
             <div class="add-task-btn" data-action="add">
                 <i class="fa-solid fa-plus"></i>
             </div>
+            <!-- add task button end  -->
 
+            <!-- user avatar part start  -->
             <div class="user-avatar">
+                <!-- avatar image  -->
                 <img src="./assets/user.png" alt="user avatar image">
+
+                <!-- greetings tooltip  -->
                 <div class="greetings">
                     <p class="greetings-title">Hi, Bruce👋</p>
                     <p class="greetings-subtitle">Welcome! Let's make today awesome.</p>
                 </div>
             </div>
-
-
-
-
+            <!-- user avatar part end  -->
         </div>
+        <!-- navbar right side end  -->
     </nav>
+    <!-- nav end  -->
+
 
     <!-- main part start  -->
     <main>
+
+        <!-- sidebar start  -->
         <aside>
+
+            <!-- all task category  -->
             <div class="all-tasks category">
                 <p>All tasks</p>
                 <span class="all-task-count">0</span>
             </div>
+
+            <!-- new task category  -->
             <div class="new-tasks category">
                 <p>New</p>
                 <span class="new-task-count">0</span>
             </div>
+
+            <!-- in progress task category  -->
             <div class="in-progress-tasks category">
                 <p>In Progress</p>
                 <span class="in-progress-task-count">0</span>
             </div>
+
+            <!-- completed task category  -->
             <div class="complete-tasks category">
                 <p>Completed</p>
                 <span class="complete-task-count">0</span>
             </div>
+
         </aside>
+        <!-- sidebar end  -->
+
+        <!-- tasks section start  -->
         <section class="tasks-section">
+            <!-- header  -->
             <div class="tasks-section-header">
+                <!-- title  -->
                 <p class="tasks-section-title"> <i class="fa-solid fa-list-check"></i> All Tasks </p>
+
+                <!-- timer  -->
                 <div class="timer">
                     <p>20:08:12 PM</p>
                 </div>
             </div>
-            <div class="tasks">
-                <!-- <div class="task-card">
-                    <div class="task-card-left-side">
-                        <p class="task-title">
-                            Dashboard for proSavvy
-                        </p>
-                        <p class="task-type">Digital Product Design</p>
 
-                        <div class="team">
-                            <p class="team-title">Team</p>
-                            <div class="team-img">
-
-                                <img src="./assets/avatars/1.png" alt="" />
-
-
-                                <img src="./assets/avatars/2.png" alt="" />
-
-
-                                <img src="./assets/avatars/3.png" alt="" />
-
-                                <div class="more-teammate">
-                                    <i class="fa-solid fa-plus"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="deadline"><i class="fa-solid fa-calendar-days"></i> Deadline: <span
-                                class="deadline-time">23-09-2024</span></p>
-                    </div>
-                    <div class="task-card-right-side">
-                        <div class="progress-percentage">
-                            <p class="percentage-value">60%</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <div class="task-card-left-side">
-                        <p class="task-title">
-                            Dashboard for proSavvy
-                        </p>
-                        <p class="task-type">Digital Product Design</p>
-
-                        <div class="team">
-                            <p class="team-title">Team</p>
-                            <div class="team-img">
-
-                                <img src="./assets/avatars/1.png" alt="" />
-
-
-                                <img src="./assets/avatars/2.png" alt="" />
-
-
-                                <img src="./assets/avatars/3.png" alt="" />
-
-                                <div class="more-teammate">
-                                    <i class="fa-solid fa-plus"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="deadline"><i class="fa-solid fa-calendar-days"></i> Deadline: <span
-                                class="deadline-time">23-09-2024</span></p>
-                    </div>
-                    <div class="task-card-right-side">
-                        <div class="progress-percentage">
-                            <p class="percentage-value">60%</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <div class="task-card-left-side">
-                        <p class="task-title">
-                            Dashboard for proSavvy
-                        </p>
-                        <p class="task-type">Digital Product Design</p>
-
-                        <div class="team">
-                            <p class="team-title">Team</p>
-                            <div class="team-img">
-
-                                <img src="./assets/avatars/1.png" alt="" />
-
-
-                                <img src="./assets/avatars/2.png" alt="" />
-
-
-                                <img src="./assets/avatars/3.png" alt="" />
-
-                                <div class="more-teammate">
-                                    <i class="fa-solid fa-plus"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="deadline"><i class="fa-solid fa-calendar-days"></i> Deadline: <span
-                                class="deadline-time">23-09-2024</span></p>
-                    </div>
-                    <div class="task-card-right-side">
-                        <div class="progress-percentage">
-                            <p class="percentage-value">60%</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="task-card add-new-task">
-                    <div class="add-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </div>
-                    <p>Add New Task</p>
-                </div> -->
-            </div>
-
+            <!-- all tasks card -->
+            <div class="tasks"></div>
         </section>
+        <!-- tasks section end  -->
+
     </main>
     <!-- main part end  -->
 
 
-    <!-- task add/delete modal  -->
+    <!-- task add/edit/delete modal  -->
     <div class="task-modal-section">
         <div class="task-modal">
+
+            <!-- close button  -->
             <div class="close-icon">
                 <i class="fa-solid fa-xmark"></i>
             </div>
 
+            <!-- modal body  -->
             <div class="task-modal-body">
+
+                <!-- action name: create or edit task  -->
                 <div class="task-action-name">Create a New Task</div>
+
+                <!-- task title input  -->
                 <div class="task-title">
+                    <!-- title  -->
                     <p class="task-title-name">Task Title</p>
+
+                    <!-- input  -->
                     <input type="text" name="task-title" id="task-title" placeholder="Write your task title...">
                     <p class="err-msg">Title is required</p>
                 </div>
+
+                <!-- task description input  -->
                 <div class="task-description">
+                    <!-- title  -->
                     <div class="task-description-title">Task Description</div>
+
+                    <!-- input  -->
                     <textarea name="task-description" id="task-description"
                         placeholder="Write your task description..."></textarea>
                     <p class="err-msg">Task description is required</p>
                 </div>
+
+                <!-- team name input  -->
                 <div class="team-name">
+                    <!-- title  -->
                     <p class="team-name-title">Team Name</p>
+
+                    <!-- input  -->
                     <input type="text" name="team-name" id="team-name" placeholder="Write team name...">
                     <p class="err-msg">Team name is required</p>
                 </div>
+
+                <!-- deadline input  -->
                 <div class="deadline">
+                    <!-- title  -->
                     <p class="deadline-title">Deadline</p>
+
+                    <!-- input  -->
                     <input type="date" name="deadline" id="deadline">
                     <p class="err-msg">Deadline is required</p>
                 </div>
 
+                <!-- progress input  -->
                 <div class="progress">
+                    <!-- title  -->
                     <p class="progress-title">Progress(%)</p>
+
+                    <!-- input  -->
                     <input type="number" name="progress" id="progress" placeholder="Write task progress number..."
                         value="0">
                 </div>
 
+                <!-- modal actions  -->
                 <div class="modal-actions">
+                    <!-- cancel button  -->
                     <button class="cancel-modal" data-action="cancel">Cancel</button>
+                    <!-- delete button  -->
                     <button class="delete-task hidden" data-action="delete">Delete Task</button>
+                    <!-- create or edit action button  -->
                     <button class="task-action" data-action="create">Create Task</button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- modal end  -->
 
-    <!-- toast  -->
+
+    <!-- toast part start  -->
     <div class="toast-section">
         <div class="toast-message">Added new task successfully</div>
     </div>
+    <!-- toast part end  -->
 
     <!-- js  -->
     <script type="module" src="./JS/main/main.js"></script>
