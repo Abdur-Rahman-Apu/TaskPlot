@@ -304,7 +304,7 @@ class UI {
 
                 <img src=${this.#getTeamMemImg(
                   task?.teamPic[2]
-                )}" alt="This image is indicating the third team members image" />
+                )} alt="This image is indicating the third team members image" />
 
                 <div class="more-teammate">
                   <i class="fa-solid fa-plus"></i>
