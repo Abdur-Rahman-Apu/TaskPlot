@@ -548,7 +548,7 @@ class UI {
       description: taskDescriptionInput?.value,
       teamName: teamNameInput?.value,
       deadline: this.#getDesiredDeadLineFormat(deadLineInput?.value),
-      progress: progressInput?.value,
+      progress: Number(progressInput?.value),
       teamPic: this.#getRandomTeamPic(),
     };
 
