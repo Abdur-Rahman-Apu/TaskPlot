@@ -21,9 +21,9 @@ body {
   font-family: var(--mulish-font);
 }
 
+/* nav design start  */
 nav {
   height: 80px;
-  /* background-color: #fff; */
   padding: 5px 10px;
   display: flex;
   justify-content: space-between;
@@ -61,22 +61,17 @@ nav {
   display: flex;
   justify-content: end;
 }
+
 .date-container {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.date-container {
   font-size: 0.9rem;
-  display: none;
 }
 
 .date {
-  /* padding: 8px; */
   font-weight: 700;
   border-radius: 8px;
-  /* text-shadow: 2px 2px 2px #ece9f0, -2px -2px 5px #ffffff, 2px 2px 5px #bcbcbc; */
 }
 
 .user-avatar {
@@ -117,16 +112,6 @@ nav {
   display: block;
 }
 
-@keyframes showAnim {
-  0% {
-    display: none;
-  }
-
-  100% {
-    display: block;
-  }
-}
-
 .search-task {
   display: none;
 }
@@ -147,6 +132,7 @@ nav {
 .add-task-btn:hover {
   box-shadow: none;
 }
+
 /* main part design start  */
 main {
   display: flex;
@@ -154,13 +140,10 @@ main {
 }
 
 aside {
-  /* width: 25%; */
-  /* height: 80vh; */
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  /* height: 80vh; */
   margin-top: 15px;
   border-radius: 10px;
   background: #ecf0f3;
@@ -195,6 +178,7 @@ aside div p {
   font-size: 1rem;
   font-weight: 600;
 }
+
 aside div span {
   position: absolute;
   right: 5%;
@@ -240,11 +224,9 @@ aside div span {
   width: fit-content;
   font-size: 1.05rem;
   font-weight: 900;
-  /* margin-bottom: 15px; */
   margin-left: 10px;
   padding: 10px;
   border-radius: 5px;
-  /* box-shadow: 20px 20px 20px #bebebe, -5px -5px 5px #ffffff; */
   box-shadow: inset 2px 2px 5px #bcbcbc, -2px -2px 5px #ffffff,
     2px 2px 5px #bcbcbc;
 }
@@ -260,7 +242,6 @@ aside div span {
 }
 
 .task-card {
-  /* flex: 1 0 430px; */
   flex-grow: 1;
   max-width: 430px;
   height: 200px;
@@ -397,11 +378,9 @@ aside div span {
 }
 
 /* task modal design start  */
-
 .task-modal-section {
   width: 100%;
   height: 100%;
-  /* display: flex; */
   display: none;
   justify-content: center;
   align-items: center;
@@ -413,10 +392,8 @@ aside div span {
 }
 
 .task-modal {
-  /* width: 40%; */
   width: 90%;
   height: 90%;
-  /* height: 740px; */
   background-color: var(--secondary-color);
   box-shadow: 20px 20px 60px #4f4f4f;
   border-radius: 8px;
@@ -534,7 +511,6 @@ aside div span {
 .modal-actions button {
   flex: 1 0 120px;
   padding: 12px;
-
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
@@ -562,8 +538,7 @@ aside div span {
   background-color: var(--violet-color);
 }
 
-/* toast  */
-
+/* toast design start  */
 .toast-section {
   width: 90%;
   display: flex;
@@ -588,15 +563,18 @@ aside div span {
   display: none;
 }
 
+/* media queries start  */
 @media (min-width: 480px) {
   .right-side {
     gap: 15px;
   }
+
   .search-task {
     display: block;
     position: relative;
     cursor: pointer;
   }
+
   #search {
     height: 35px;
     padding: 15px;
